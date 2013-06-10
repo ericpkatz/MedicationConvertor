@@ -1,0 +1,556 @@
+﻿<!DOCTYPE html>
+<html  manifest="paincalc.appcache">
+<head>
+    <title>Opioid Convertor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="Content/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css" />
+                    <script>
+                        window.applicationCache.onupdateready = function () {
+                            window.document.location = "update.htm";
+                        };
+                </script>
+    <script src="Scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/ek-utilities.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/ek-jqm-utilities.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/ns.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/Medication.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/Medications.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/Pharmacy.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/Rx.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/Regimen.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/RegimenConvertor.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/RxWrapper.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/RxEditorWrapper.js" type="text/javascript"></script>
+    <script src="Scripts/PainCalc/Controller.js" type="text/javascript"></script>
+    <script src="Scripts/mustache.js" type="text/javascript"></script>
+    <style>
+    .ui-input-text[readonly]
+    {
+        border: none;
+        box-shadow:none;
+        color: #333333;
+        text-shadow: 0 0px 0 #FFFFFF;        
+    }
+    span.IO
+    {
+        display:none;
+    }
+    span.MedicationType
+    {
+        display:none;
+    }
+.ui-btn-up-f, .ui-btn-hover-f, .ui-btn-down-f {
+  color: white;
+  font-weight: bold;
+  text-decoration: none; }
+
+.ui-btn-up-f {
+  border: 1px solid #711414;
+  background: #ab2525;
+  text-shadow: 0 -1px 1px #711414;
+  background-image: -moz-linear-gradient(top, #c44f4f, #ab2525);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #c45e5e), color-stop(1, #9e3939));
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#c44f4f', EndColorStr='#ab2525')"; }
+
+.ui-btn-hover-f {
+  border: 1px solid #6e0000;
+  background: #b54a4a;
+  text-shadow: 0 -1px 1px #690101;
+  background-image: -moz-linear-gradient(top, #d47272, #b54a4a);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d47272), color-stop(1, #b54a4a));
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#d47272', EndColorStr='#b54a4a')"; }
+
+.ui-btn-down-f {
+  border: 1px solid #782323;
+  background: #c44f4f;
+  text-shadow: 0 -1px 1px #782323;
+  background-image: -moz-linear-gradient(top, #9e3939, #c44f4f);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #9e3939), color-stop(1, #c44f4f));
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#9e3939', EndColorStr='#c44f4f')"; }
+    </style>
+    <script>
+        PainCalc.ThePharmacy = new PainCalc.Pharmacy(PainCalc.meds);
+
+        var consoleLogger = {
+            log: function (msg) {
+                if(console)
+                    console.log(msg);
+            }
+        };
+
+        //PainCalc.RegimenConvertor.Loggers.push(consoleLogger);
+
+        $(function () {
+            var convertor = new PainCalc.RegimenConvertor(
+                /*new PainCalc.Regimen(
+                    new PainCalc.Rx(PainCalc.ThePharmacy.Medications(PainCalc.MedicationTypes.ShortActing)[1]),
+                    new PainCalc.Rx(PainCalc.ThePharmacy.Medications(PainCalc.MedicationTypes.LongActing)[0])
+                ),
+                new PainCalc.Regimen(
+                    new PainCalc.Rx(PainCalc.ThePharmacy.Medications(PainCalc.MedicationTypes.ShortActing)[1]),
+                    new PainCalc.Rx(PainCalc.ThePharmacy.Medications(PainCalc.MedicationTypes.LongActing)[0])
+                )*/
+           );
+
+            var controller = new PainCalc.Controller(convertor);
+
+        });
+
+    </script>
+</head>
+<body>
+
+<!-- ** SCREEN ** EXISTING (SE)-->
+
+    <section data-role="page" id="Existing">
+        <section data-role="header">
+            <h1>
+                Opioid-Convertor</h1>
+            <a href="#" data-icon="refresh">Reset</a>
+        </section>
+        <section data-role="content">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-b">
+                Existing
+                </div>
+                </div>
+                <div class="ui-block-b">
+                <div class="ui-bar ui-bar-b">
+                Proposed
+                </div>
+                </div>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                <div  id="Existing-ShortActing-Container" class="ui-bar ui-bar-c">
+                </div>
+                </div><div class="ui-block-b">
+                <div class="ui-bar ui-bar-c" id="Proposed-ShortActing-Container">
+                </div>
+                </div>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                <div class="ui-bar ui-bar-c"  id="Existing-LongActing-Container">
+                </div>
+                </div>
+                <div class="ui-block-b">
+                <div class="ui-bar ui-bar-c"  id="Proposed-LongActing-Container">
+                </div>
+                </div>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                <div class="ui-bar ui-bar-c" id="Existing-IV-Container">
+                </div>
+                </div>
+                <div class="ui-block-b">
+                <div class="ui-bar ui-bar-c"  id="Proposed-IV-Container">
+                </div>
+                </div>
+            </div>
+            <a href="#Summary" data-role="button" data-icon="grid">Conversion Summary</a>
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+
+
+<!-- ** SCREEN ** SUMMARY (SS)-->
+
+    <section data-role="page" id="Summary" data-add-back-btn="true">
+        <section data-role="header">
+            <h1>
+                Conversion Summary</h1>
+        </section>
+        <section data-role="content">
+            <div class="summary-grid">
+             <div class="ui-grid-b">
+                <div class="ui-block-a">
+  
+                </div>
+                <div class="ui-block-b">
+                <div class="ui-bar ui-bar-b">
+                    Existing
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                <div class="ui-bar ui-bar-b">
+                    Proposed
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-e">
+                    Short Acting
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ShortActing-Existing-Summary ui-bar ui-bar-c"></div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ShortActing-Proposed-Summary ui-bar ui-bar-c"></div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+               <div class="ui-block-a">
+                                        <div class="ui-bar ui-bar-e">
+                    (Short Acting Normalized)
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ShortActing-Existing-Normalized ui-bar ui-bar-c"></div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ShortActing-Proposed-Normalized ui-bar ui-bar-c"></div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                <div class="ui-bar ui-bar-e">
+                    Long Acting
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="LongActing-Existing-Summary ui-bar ui-bar-c"></div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="LongActing-Proposed-Summary ui-bar ui-bar-c"></div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+               <div class="ui-block-a">
+                                        <div class="ui-bar ui-bar-e">
+                    (Long Acting Normalized)
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="LongActing-Existing-Normalized ui-bar ui-bar-c"></div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="LongActing-Proposed-Normalized ui-bar ui-bar-c"></div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                <div class="ui-bar ui-bar-e">
+                    IV
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="IV-Existing-Summary ui-bar ui-bar-c"></div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="IV-Proposed-Summary ui-bar ui-bar-c"></div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+               <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-e">
+                    (IV Normalized)
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="IV-Existing-Normalized ui-bar ui-bar-c"></div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="IV-Proposed-Normalized ui-bar ui-bar-c"></div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+               <div class="ui-block-a">
+                    
+                </div>
+                <div class="ui-block-b">
+                    <div class="Existing-Normalized ui-bar ui-bar-d"></div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="Proposed-Normalized ui-bar ui-bar-d"></div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+
+<!-- ** DIALOG ** EXISTING SHORT ACTING (DESA) -->
+    <section data-role="page" id="Existing-ShortActing">
+        <section data-role="header">
+            <h1></h1>
+        </section>
+        <section data-role="content">
+               
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+<!--  ** DIALOG ** EXISTING LONG ACTING (DELA) -->
+    <section data-role="page" id="Existing-LongActing">
+        <section data-role="header">
+            <h1></h1>
+        </section>
+        <section data-role="content">
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+<!--   ** DIALOG ** EXISTING IV (DEIV) -->
+    <section data-role="page" id="Existing-IV">
+        <section data-role="header">
+            <h1></h1>
+        </section>
+        <section data-role="content">
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+<!--   ** DIALOG ** PROPOSED SHORT ACTING (DPSA) -->
+    <section data-role="page" id="Proposed-ShortActing">
+        <section data-role="header">
+            <h1></h1>
+        </section>
+        <section data-role="content">
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+<!--   ** DIALOG ** PROPOSED LONG ACTING (DPLA) -->
+    <section data-role="page" id="Proposed-LongActing">
+        <section data-role="header">
+            <h1></h1>
+        </section>
+        <section data-role="content">
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+<!--PROPOSED IV DIALOG (DPIV) -->
+    <section data-role="page" id="Proposed-IV">
+        <section data-role="header">
+            <h1></h1>
+        </section>
+        <section data-role="content">
+        </section>
+        <section data-role="footer">
+            <h2></h2>
+        </section>
+    </section>
+
+    <!-- TEMPLATES -->
+
+    <!-- **TEMPLATE** FOR PRESCRIPTION TAB-->
+    <script type="text/template" id="rx-tab-input">
+        <a  href="#{{IO}}-{{MedicationType}}" data-role="button" data-rel="dialog" {{#NotIsEmpty}}data-theme="e"{{/NotIsEmpty}}>{{ButtonText}}<br />{{&GetLabel}}</a>
+        <div>
+        {{#IsEmpty}}{{/IsEmpty}}
+        {{#NotIsEmpty}}
+       <!-- <a href="#" class="delete-tab" data-io="{{IO}}" data-medication-type="{{MedicationType}}" data-role="button">Delete</a> -->
+            
+        {{/NotIsEmpty}}
+        </div>
+    </script>
+
+
+    <!-- **TEMPLATE** EXISTING SHORT ACTING (TESA) -->
+    <script type="text/template" id="rx-editor-ExistingShortActing">
+        <div class="editor">
+            <span class="IO">{{IO}}</span>
+            <span class="MedicationType">{{MedicationType}}</span>
+            <select class="Medication">
+                <option value="-1">None</option>
+                {{#Meds}}<option value="{{Name}}" {{#Selected}}selected=selected{{/Selected}}>{{Name}}</option>{{/Meds}}
+            </select>
+            <div class="doseDetails"  {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>
+                <fieldset>
+                    <label for="Dose">Dose in <span class="units">{{Units}}</span>:</label>
+                    <input class="Dose" id="Dose" value="{{#NotIsEmpty}}{{DisplayDose}}{{/NotIsEmpty}}" type="range"  {{#NotIsEmpty}}step="{{MinDose}}" min="{{MinDose}}" max="{{MaxDose}}"{{/NotIsEmpty}}/>
+   
+                </fieldset>
+                <fieldset>
+                    <label for="DosesPerDay">Pills Per Day:</label>
+                    <input type="range" min="1" max="30" step="1" class="DosesPerDay"  id="DosesPerDay" value="{{#NotIsEmpty}}{{RxWrapper.Rx.DosesPerDay}}{{/NotIsEmpty}}"/>
+                </fieldset>
+            </div>
+            <a href="#Existing" data-theme="b" data-role="button">Done</a>
+<!--           <a data-role="button"  class="delete" data-theme="f" data-theme="f" data-icon="delete" {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>Delete</a>-->
+
+            <div class="emptyMessage" {{#NotIsEmpty}}style="display:none;"{{/NotIsEmpty}}>
+                
+            </div>
+        </div>
+    </script>
+
+<!-- **TEMPLATE** EXISTING LONG ACTING (TELA)-->
+        <script type="text/template" id="rx-editor-ExistingLongActing">
+        <div class="editor">
+            <span class="IO" style="display:none">{{IO}}</span>
+            <span class="MedicationType"  style="display:none">{{MedicationType}}</span>
+            <select class="Medication">
+                <option value="-1">None</option>
+                {{#Meds}}<option value="{{Name}}" {{#Selected}}selected=selected{{/Selected}}>{{Name}}</option>{{/Meds}}
+            </select>
+            <div class="doseDetails"  {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>
+                <fieldset>
+                    <label for="Dose">Dose in <span class="units">{{Units}}</span>:</label>
+                    <input class="Dose" id="Dose" value="{{#NotIsEmpty}}{{DisplayDose}}{{/NotIsEmpty}}" type="range"  {{#NotIsEmpty}}step="{{MinDose}}" min="{{MinDose}}" max="{{MaxDose}}"{{/NotIsEmpty}}/>
+   
+                </fieldset>
+                    <div class="newFrequency"></div>
+                    <input class="DosesPerDay"  id="DosesPerDay" value="{{#NotIsEmpty}}{{RxWrapper.Rx.DosesPerDay}}{{/NotIsEmpty}}" type="hidden"/>
+            </div>
+            <a href="#Existing" data-theme="b" data-role="button">Done</a>
+<!--           <a data-role="button"  class="delete" data-theme="f" data-theme="f" data-icon="delete" {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>Delete</a>-->
+            <div class="emptyMessage" {{#NotIsEmpty}}style="display:none;"{{/NotIsEmpty}}>
+                
+            </div>
+        </div>
+    </script>
+
+<!-- **TEMPLATE** EXISTING IV (TEIV) -->
+    <script type="text/template" id="rx-editor-ExistingIV">
+        <div class="editor">
+            <span class="IO">{{IO}}</span>
+            <span class="MedicationType">{{MedicationType}}</span>
+            <select class="Medication">
+                <option value="-1">None</option>
+                {{#Meds}}<option value="{{Name}}" {{#Selected}}selected=selected{{/Selected}}>{{Name}}</option>{{/Meds}}
+            </select>
+            <div class="doseDetails"  {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>
+                <fieldset>
+                    <label for="Dose">Dose in <span class="units">{{Units}}</span> :</label>
+                    <input class="Dose" id="Dose" value="{{#NotIsEmpty}}{{RxWrapper.Rx.DisplayDose}}{{/NotIsEmpty}}"  value="1"/>
+                    <input class="DosesPerDay"  id="DosesPerDay" value="{{#NotIsEmpty}}{{RxWrapper.Rx.DosesPerDay}}{{/NotIsEmpty}}" style="display:none"/>
+                    <label for="OverHours">Taken Over Hours:</label>
+                   <input type="range" min="1" max="24" step="1" id="OverHours" class="OverHours" value="{{#NotIsEmpty}}{{OverHours}}{{/NotIsEmpty}}"/>
+                   <span>Hours</span>
+                </fieldset>
+            </div>
+            <a href="#Existing" data-theme="b" data-role="button">Done</a>
+<!--           <a data-role="button"  class="delete" data-theme="f" data-theme="f" data-icon="delete" {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>Delete</a>-->
+            <div class="emptyMessage" {{#NotIsEmpty}}style="display:none;"{{/NotIsEmpty}}>
+                
+            </div>
+        </div>
+    </script>
+
+    <!-- **TEMPLATE** PROPOSED SHORT ACTING (TPSA) -->
+    <script type="text/template" id="rx-editor-ProposedShortActing">
+        <div class="editor">
+            <span class="IO">{{IO}}</span>
+            <span class="MedicationType">{{MedicationType}}</span>
+            <select class="Medication">
+                <option value="-1">None</option>
+                {{#Meds}}<option value="{{Name}}" {{#Selected}}selected=selected{{/Selected}}>{{Name}}</option>{{/Meds}}
+            </select>
+            <div class="doseDetails"  {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>
+                <fieldset>
+                    <label for="Dose">Dose:</label>
+                    <input class="Dose" id="Dose" value="{{#NotIsEmpty}}{{RxWrapper.Rx.Dose}}{{/NotIsEmpty}}"  {{#NotIsEmpty}}step="{{RxWrapper.Rx.Medication.AvailableMultiples}}" min="{{RxWrapper.Rx.Medication.AvailableMultiples}}" max="{{MaxDose}}"{{/NotIsEmpty}} readonly="readonly"/>
+   
+                </fieldset>
+                    <div class="newFrequency"></div>
+                    <input class="DosesPerDay"  id="DosesPerDay" value="{{#NotIsEmpty}}{{RxWrapper.Rx.DosesPerDay}}{{/NotIsEmpty}}" type="hidden"/>
+            </div>
+            <a href="#Existing" data-theme="b" data-role="button">Done</a>
+<!--           <a data-role="button"  class="delete" data-theme="f" data-theme="f" data-icon="delete" {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>Delete</a>-->
+            <div class="emptyMessage" {{#NotIsEmpty}}style="display:none;"{{/NotIsEmpty}}>
+                
+            </div>
+        </div>
+    </script>
+<!-- **TEMPLATE** PROPOSED LONG ACTING (TPLA) -->
+        <script type="text/template" id="rx-editor-ProposedLongActing">
+        <div class="editor">
+            <span class="IO">{{IO}}</span>
+            <span class="MedicationType">{{MedicationType}}</span>
+            <select class="Medication">
+                <option value="-1">None</option>
+                {{#Meds}}<option value="{{Name}}" {{#Selected}}selected=selected{{/Selected}}>{{Name}}</option>{{/Meds}}
+            </select>
+            <div class="doseDetails"  {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>
+                <fieldset>
+                    <label for="Dose">Dose in <span class="units">{{Units}}</span>: </label>
+                    <input class="Dose" id="Dose" value="{{#NotIsEmpty}}{{DisplayDose}}{{/NotIsEmpty}}" readonly="readonly"/>
+   
+                </fieldset>
+                    <div class="newFrequency"></div>
+                    <input class="DosesPerDay"  id="DosesPerDay" value="{{#NotIsEmpty}}{{RxWrapper.Rx.DosesPerDay}}{{/NotIsEmpty}}" type="hidden"/>
+            </div>
+            <a href="#Existing" data-theme="b" data-role="button">Done</a>
+<!--           <a data-role="button"  class="delete" data-theme="f" data-theme="f" data-icon="delete" {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>Delete</a>-->
+            <div class="emptyMessage" {{#NotIsEmpty}}style="display:none;"{{/NotIsEmpty}}>
+                
+            </div>
+        </div>
+    </script>
+
+
+
+<!-- **TEMPLATE** PROPOSED IV (TPIV) -->
+    <script type="text/template" id="rx-editor-ProposedIV">
+        <div class="editor">
+            <span class="IO">{{IO}}</span>
+            <span class="MedicationType">{{MedicationType}}</span>
+            <select class="Medication">
+                <option value="-1">None</option>
+                {{#Meds}}<option value="{{Name}}" {{#Selected}}selected=selected{{/Selected}}>{{Name}}</option>{{/Meds}}
+            </select>
+            <div class="doseDetails"  {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>
+                    Dose in <span class="units">{{Units}}</span> <input class="Dose" id="Dose" value="{{#NotIsEmpty}}{{RxWrapper.Rx.Dose}}{{/NotIsEmpty}}" readonly=readonly value="1"/> 
+                
+                    <input class="DosesPerDay"  id="DosesPerDay" value="24" type="hidden"/>
+                
+            </div>
+            <a href="#Existing" data-theme="b" data-role="button">Done</a>
+<!--           <a data-role="button"  class="delete" data-theme="f" data-theme="f" data-icon="delete" {{#IsEmpty}}style="display:none;"{{/IsEmpty}}>Delete</a>-->
+            <div class="emptyMessage" {{#NotIsEmpty}}style="display:none;"{{/NotIsEmpty}}>
+                
+            </div>
+        </div>
+    </script>
+
+    <!-- **TEMPLATE** Frequency Control (TF) -->
+    <script type="text/template" id="frequency-template">
+                <div data-role="fieldcontain">
+    <fieldset data-role="controlgroup" data-type="horizontal">
+    	<legend>Medication Frequency:</legend>
+         	<input type="radio" name="frequency" id="qDay" value="1" />
+         	<label for="qDay">qDay</label>
+         	<input type="radio" name="frequency" id="q12h" value="2"/>
+         	<label for="q12h">q12h</label>
+         	<input type="radio" name="frequency" id="q8h" value="3" />
+         	<label for="q8h">q8h</label>
+         	<input type="radio" name="frequency" id="q6h" value="4" />
+         	<label for="q6h">q6h</label>
+         	<input type="radio" name="frequency" id="q4h" value="6" />
+         	<label for="q4h">q4h</label>
+         	<input type="radio" name="frequency" id="q3h" value="8" />
+         	<label for="q3h">q3h</label>
+         	<input type="radio" name="frequency" id="q2h" value="12" />
+         	<label for="q2h">q2h</label>
+         	<input type="radio" name="frequency" id="q1h" value="24" />
+         	<label for="q1h">q1h</label>
+    </fieldset>
+</div>
+    </script>
+
+</body>
+</html>
