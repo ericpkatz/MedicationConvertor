@@ -19,7 +19,7 @@ PainCalc.Controller.prototype = {
         $("#Existing-ShortActing").bind("pagebeforeshow", function () {
             var rxWrapper = new PainCalc.RxWrapper({
                 Rx: that.convertor.GetPrescription(
-                    PainCalc.IO.Existing, 
+                    PainCalc.IO.Existing,
                     PainCalc.MedicationTypes.ShortActing),
                 IO: PainCalc.IO.Existing,
                 MedicationType: PainCalc.MedicationTypes.ShortActing
@@ -219,7 +219,8 @@ PainCalc.Controller.prototype = {
         this.bindConvertorToView(convertor);
     },
     log: function (message) {
-        //console.log(message);
+        if(console && console.log)
+            console.log(message);
 
     },
     bindConvertorToView: function (c) {
@@ -336,9 +337,8 @@ PainCalc.Controller.prototype = {
     setFrequencyControls: function (editor, rx, isProposed, medicationType) {
         if (!rx)
             return;
-        var template = $("#frequency-template");
+        var template = $(rx.Medication.IsPatch ? "#frequency-template-patch": "#frequency-template");
         if (this.frequencyControlFromEditor(editor).length != 0) {
-            var template = $("#frequency-template");
             var frequencyHtml = $(template.html());
             var frequency = rx.DosesPerDay;
             if (isProposed) {

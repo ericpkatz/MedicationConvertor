@@ -22,17 +22,18 @@ for (var i = 1; i <= 24; i++)
 //a medication
 
 PainCalc.Medication = function (config) {
-    if(config.MedicationType)
+    if (config.MedicationType)
         ek.utilities.enumVerify(PainCalc.MedicationTypes, config.MedicationType);
     if (config.Units)
         ek.utilities.enumVerify(PainCalc.MedicationUnits, config.Units);
     this.Name = config.Name;
-    this.ConversionFactor = config.ConversionFactor;//always in mg
+    this.ConversionFactor = config.ConversionFactor; //always in mg
     this.Units = config.Units;
-    this.AvailableMultiples = config.AvailableMultiples;//always in mg
+    this.AvailableMultiples = config.AvailableMultiples; //always in mg
     this.TypicalDosesPerDay = config.TypicalDosesPerDay;
     this.MedicationType = config.MedicationType;
     this.AvailableStrengths = config.AvailableStrengths;
+    this.IsPatch = config.IsPatch;
 }
 
 PainCalc.Medication.prototype = {

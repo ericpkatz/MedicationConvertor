@@ -124,7 +124,8 @@ PainCalc.meds = [
         AvailableMultiples: .0125,
         TypicalDosesPerDay: 24,
         MedicationType: PainCalc.MedicationTypes.LongActing,
-        AvailableStrengths: [12.5, 25, 50, 75, 100]
+        AvailableStrengths: [12.5, 25, 50, 75, 100],
+        IsPatch : true
     }),
     new PainCalc.Medication({
         Name: "Oxycontin",
@@ -191,7 +192,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Oxymorphone IV",
-        ConversionFactor: 0.05,
+        ConversionFactor: 1.0,
         Units: PainCalc.MedicationUnits.Mg,
         AvailableMultiples: 1,
         TypicalDosesPerDay: 24,

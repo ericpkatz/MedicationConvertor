@@ -121,7 +121,9 @@ PainCalc.RegimenConvertor.prototype = {
             return this.Existing().Normalized();
         else {
             if (medType == PainCalc.MedicationTypes.ShortActing) {
-                return this.Existing().Normalized() - this.Proposed().LongActing()[0].Normalized();
+                //if there currently is no short acting - then we need to give more bandwidth
+                var factor = !this.Proposed().HasShortActing() ? (3/4) : 1.0;
+                return this.Existing().Normalized() - this.Proposed().LongActing()[0].Normalized() * factor;
             }
             if (medType == PainCalc.MedicationTypes.LongActing) {
                 return this.Existing().Normalized() * (3 / 4);

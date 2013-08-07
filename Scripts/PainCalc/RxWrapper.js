@@ -24,10 +24,10 @@ PainCalc.RxWrapper.prototype = {
     ButtonText: function () {
         switch (this.MedicationType()) {
             case PainCalc.MedicationTypes.ShortActing:
-                return "SA";
+                return "Short Acting";
                 break;
             case PainCalc.MedicationTypes.LongActing:
-                return "LA";
+                return "Long Acting";
                 break;
             case PainCalc.MedicationTypes.IV:
                 return "IV";
