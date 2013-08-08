@@ -50,11 +50,7 @@
     <Content Include="Content\jquery.mobile.theme-1.2.0.css" />
     <Content Include="Content\jquery.mobile.theme-1.2.0.min.css" />
     <Content Include="index\index.htm" />
-    <Content Include="test\manifest-test-2.htm" />
-    <Content Include="test\manifest-test.htm" />
-    <Content Include="test\manifest-test.js" />
-    <Content Include="test\offline.js" />
-    <Content Include="test\online.js" />
+    <Content Include="Scripts\manifest.js" />
     <Content Include="update.htm" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\PainCalc\Controller.js" />
@@ -62,10 +58,10 @@
     <Content Include="index.htm" />
     <Content Include="Scripts\jquery.mobile-1.2.0.min.js" />
     <Content Include="Scripts\mustache.js" />
-    <Content Include="Scripts\PainCalc\ek-jqm-utilities.js" />
+    <Content Include="Scripts\ekCommon\ek-jqm-utilities.js" />
     <Content Include="Scripts\PainCalc\RxEditorWrapper.js" />
     <Content Include="Scripts\PainCalc\RxWrapper.js" />
-    <Content Include="Scripts\PainCalc\ek-utilities.js" />
+    <Content Include="Scripts\ekCommon\ek-utilities.js" />
     <Content Include="Scripts\PainCalc\Medication.js" />
     <Content Include="Scripts\PainCalc\Medications.js" />
     <Content Include="Scripts\PainCalc\ns.js" />
@@ -76,9 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="paincalc.appcache">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="test\manifest-test.appcache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\ftp.pubxml" />

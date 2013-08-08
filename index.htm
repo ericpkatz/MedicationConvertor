@@ -45,8 +45,8 @@
         });
     </script>
     <script src="Scripts/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
-    <script src="Scripts/PainCalc/ek-utilities.js" type="text/javascript"></script>
-    <script src="Scripts/PainCalc/ek-jqm-utilities.js" type="text/javascript"></script>
+    <script src="Scripts/ekCommon/ek-utilities.js" type="text/javascript"></script>
+    <script src="Scripts/ekCommon/ek-jqm-utilities.js" type="text/javascript"></script>
     <script src="Scripts/PainCalc/ns.js" type="text/javascript"></script>
     <script src="Scripts/PainCalc/Medication.js" type="text/javascript"></script>
     <script src="Scripts/PainCalc/Medications.js" type="text/javascript"></script>
@@ -611,10 +611,11 @@
     </fieldset>
 </div>
     </script>
+
         <section data-role="page" id="new-version">
         <section data-role="header">
             <h1>
-                Opioid-Convertor</h1>
+                Opioid-Convertor - Version Manager</h1>
             <a href="#" data-icon="refresh">Reset</a>
         </section>
         <section data-role="content">
@@ -625,28 +626,7 @@
             <h2></h2>
         </section>
     </section>
-    <script>
-        var appCacheEvents = ["checking", "error", "noupdate", "downloading", "progress", "updateready", "cached", "obsolete"];
-        for (var i = 0; i < appCacheEvents.length; i++) {
-            applicationCache.addEventListener(appCacheEvents[i], function (evt) {
-                if (evt.type == "error") {
-                    //console.log("error");
-                }
-                if (evt.type == "downloading") {
-                    $.mobile.changePage("#new-version");
-                    //pop up wait window
-                }
-                if (evt.type == "progress") {
-                    var elem = $(".progress", $("#new-version"));
-                    elem.html(elem.html() + ".");
-                }
-                if (evt.type == "updateready") {
-                    var elem = $("a[href='index.htm']", $("#new-version"));
-                    $(".ui-btn-text", elem).text("New Software Version Available");
-                    elem.removeClass("ui-disabled")
-                }
-            });
-        }
-    </script>
+
+    <script src="Scripts/manifest.js" type="text/javascript"></script>
 </body>
 </html>
