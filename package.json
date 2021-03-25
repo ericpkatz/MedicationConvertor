@@ -1,0 +1,27 @@
+{
+  "name": "MedicationConvertor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericpkatz/MedicationConvertor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericpkatz/MedicationConvertor/issues"
+  },
+  "homepage": "https://github.com/ericpkatz/MedicationConvertor#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}

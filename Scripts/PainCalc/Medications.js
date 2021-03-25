@@ -20,7 +20,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Hydromorphone",
-        ConversionFactor: 8,
+        ConversionFactor: 6,
         Units: PainCalc.MedicationUnits.Mg,
         AvailableMultiples: 2,
         TypicalDosesPerDay: 6,
@@ -65,7 +65,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Codeine",
-        ConversionFactor: 130,
+        ConversionFactor: 200,
         Units: PainCalc.MedicationUnits.Mg,
         AvailableMultiples: 15,
         TypicalDosesPerDay: 6,
@@ -74,7 +74,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Hydrocodone",
-        ConversionFactor: 30,
+        ConversionFactor: 25,
         Units: PainCalc.MedicationUnits.Mg,
         AvailableMultiples: 5,
         TypicalDosesPerDay: 6,
@@ -83,7 +83,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Levorphanol",
-        ConversionFactor: 4,
+        ConversionFactor: 2.17,
         Units: PainCalc.MedicationUnits.Mg,
         AvailableMultiples: 2,
         TypicalDosesPerDay: 6,
@@ -119,7 +119,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Fentanyl Patch",
-        ConversionFactor: .25,
+        ConversionFactor: .266,
         Units: PainCalc.MedicationUnits.Mc,
         AvailableMultiples: .0125,
         TypicalDosesPerDay: 24,
@@ -147,7 +147,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Exalgo",
-        ConversionFactor: 8,
+        ConversionFactor: 6,
         Units: PainCalc.MedicationUnits.Mg,
         AvailableMultiples: 4,
         TypicalDosesPerDay: 1,
@@ -174,7 +174,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Fentanyl IV",
-        ConversionFactor: .25,
+        ConversionFactor: .266,
         Units: PainCalc.MedicationUnits.Mc,
         AvailableMultiples: 1,
         TypicalDosesPerDay: 24,
@@ -183,7 +183,7 @@ PainCalc.meds = [
     }),
     new PainCalc.Medication({
         Name: "Hydromorphone IV",
-        ConversionFactor: 2,
+        ConversionFactor: 1.71,
         Units: PainCalc.MedicationUnits.Mg,
         AvailableMultiples: 1,
         TypicalDosesPerDay: 24,

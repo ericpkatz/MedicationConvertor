@@ -1,2 +1,4 @@
 /obj
 /Properties
+.DS_Store
+*.zip
