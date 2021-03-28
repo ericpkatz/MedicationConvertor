@@ -217,6 +217,86 @@ PainCalc.meds = [
         TypicalDosesPerDay: 24,
         MedicationType: PainCalc.MedicationTypes.IV,
         AvailableStrengths: [1.0]
+    }),
+  new PainCalc.Medication({
+        Name: " Buprenorphine Film",
+        ConversionFactor: 75,
+        Units: PainCalc.MedicationUnits.Mc,
+        AvailableMultiples: 75,
+        TypicalDosesPerDay: 4,
+        MedicationType: PainCalc.MedicationTypes.ShortActing,
+        AvailableStrengths : [75,150,300,450,600,750,900]
+    }),
+
+    new PainCalc.Medication({
+        Name: "Buprenorphine SL",
+        ConversionFactor: 0.77,
+        Units: PainCalc.MedicationUnits.Mg,
+        AvailableMultiples: 2,
+        TypicalDosesPerDay: 4,
+        MedicationType: PainCalc.MedicationTypes.ShortActing,
+        AvailableStrengths : [2,8]
+    }),    
+
+new PainCalc.Medication({
+        Name: "Buprenorphine TD",
+        ConversionFactor: 0.327,
+        Units: PainCalc.MedicationUnits.Mc,
+        AvailableMultiples: 5,
+        TypicalDosesPerDay: 24,
+        MedicationType: PainCalc.MedicationTypes.LongActing,
+        AvailableStrengths : [5,7.5,10,15,20]
+    }),
+
+    new PainCalc.Medication({
+        Name: "Tapentadol IR",
+        ConversionFactor: 75,
+        Units: PainCalc.MedicationUnits.Mg,
+        AvailableMultiples: 25,
+        TypicalDosesPerDay: 6,
+        MedicationType: PainCalc.MedicationTypes.ShortActing,
+        AvailableStrengths : [50,75,100]
+    }),
+
+    new PainCalc.Medication({
+        Name: "Tapentadol ER",
+        ConversionFactor: 75,
+        Units: PainCalc.MedicationUnits.Mg,
+        AvailableMultiples: 50,
+        TypicalDosesPerDay: 2,
+        MedicationType: PainCalc.MedicationTypes.LongActing,
+        AvailableStrengths : [50,100,150,200,250,300]
+    }),
+
+    new PainCalc.Medication({
+        Name: "Tramadol IR",
+        ConversionFactor: 150,
+        Units: PainCalc.MedicationUnits.Mg,
+        AvailableMultiples: 50,
+        TypicalDosesPerDay: 6,
+        MedicationType: PainCalc.MedicationTypes.ShortActing,
+        AvailableStrengths : [50]
+    }),
+
+    new PainCalc.Medication({
+        Name: "Tramadol ER",
+        ConversionFactor: 150,
+        Units: PainCalc.MedicationUnits.Mg,
+        AvailableMultiples: 50,
+        TypicalDosesPerDay: 1,
+        MedicationType: PainCalc.MedicationTypes.LongActing,
+        AvailableStrengths : [100,150,200,300]
+    }),
+
+    new PainCalc.Medication({
+        Name: "Oliceridine IV",
+        ConversionFactor: 1.71,
+        Units: PainCalc.MedicationUnits.Mg,
+
+        AvailableMultiples: 1,
+        TypicalDosesPerDay: 24,
+        MedicationType: PainCalc.MedicationTypes.IV,
+        AvailableStrengths : [0.1]
     })
 
     ];
