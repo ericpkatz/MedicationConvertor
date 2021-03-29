@@ -218,9 +218,9 @@ PainCalc.meds = [
         MedicationType: PainCalc.MedicationTypes.IV,
         AvailableStrengths: [1.0]
     }),
-     new PainCalc.Medication({
+    new PainCalc.Medication({
         Name: " Buprenorphine Film",
-        ConversionFactor: 0.075,
+        ConversionFactor: 1,
         Units: PainCalc.MedicationUnits.Mc,
         AvailableMultiples: 0.075,
         TypicalDosesPerDay: 4,
