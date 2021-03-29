@@ -218,11 +218,11 @@ PainCalc.meds = [
         MedicationType: PainCalc.MedicationTypes.IV,
         AvailableStrengths: [1.0]
     }),
-  new PainCalc.Medication({
+     new PainCalc.Medication({
         Name: " Buprenorphine Film",
-        ConversionFactor: 75,
+        ConversionFactor: 0.075,
         Units: PainCalc.MedicationUnits.Mc,
-        AvailableMultiples: 75,
+        AvailableMultiples: 0.075,
         TypicalDosesPerDay: 4,
         MedicationType: PainCalc.MedicationTypes.ShortActing,
         AvailableStrengths : [75,150,300,450,600,750,900]
@@ -237,17 +237,15 @@ PainCalc.meds = [
         MedicationType: PainCalc.MedicationTypes.ShortActing,
         AvailableStrengths : [2,8]
     }),    
-
-new PainCalc.Medication({
+  new PainCalc.Medication({
         Name: "Buprenorphine TD",
         ConversionFactor: 0.327,
         Units: PainCalc.MedicationUnits.Mc,
-        AvailableMultiples: 5,
+        AvailableMultiples: 0.005,
         TypicalDosesPerDay: 24,
         MedicationType: PainCalc.MedicationTypes.LongActing,
         AvailableStrengths : [5,7.5,10,15,20]
     }),
-
     new PainCalc.Medication({
         Name: "Tapentadol IR",
         ConversionFactor: 75,
